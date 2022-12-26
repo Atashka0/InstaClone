@@ -11,6 +11,9 @@
 		FE593BD6295A0A5B00DFCD51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE593BD5295A0A5B00DFCD51 /* ContentView.swift */; };
 		FE593BD8295A0A5C00DFCD51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE593BD7295A0A5C00DFCD51 /* Assets.xcassets */; };
 		FE593BDB295A0A5C00DFCD51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE593BDA295A0A5C00DFCD51 /* Preview Assets.xcassets */; };
+		FE593BEC295A170C00DFCD51 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE593BEB295A170C00DFCD51 /* FeedView.swift */; };
+		FE593BEE295A176100DFCD51 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE593BED295A176100DFCD51 /* StoryView.swift */; };
+		FE593BF0295A1A6500DFCD51 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE593BEF295A1A6500DFCD51 /* PostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		FE593BD5295A0A5B00DFCD51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FE593BD7295A0A5C00DFCD51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE593BDA295A0A5C00DFCD51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FE593BEB295A170C00DFCD51 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		FE593BED295A176100DFCD51 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		FE593BEF295A1A6500DFCD51 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +57,11 @@
 		FE593BD2295A0A5B00DFCD51 /* InstaClone */ = {
 			isa = PBXGroup;
 			children = (
+				FE593BE7295A166F00DFCD51 /* Components */,
+				FE593BE6295A161F00DFCD51 /* Extensions */,
+				FE593BE5295A161C00DFCD51 /* Model */,
+				FE593BE3295A160600DFCD51 /* New Group */,
+				FE593BE1295A14C900DFCD51 /* Core */,
 				FE593BD3295A0A5B00DFCD51 /* InstaCloneApp.swift */,
 				FE593BD5295A0A5B00DFCD51 /* ContentView.swift */,
 				FE593BD7295A0A5C00DFCD51 /* Assets.xcassets */,
@@ -65,6 +76,68 @@
 				FE593BDA295A0A5C00DFCD51 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FE593BE1295A14C900DFCD51 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FE593BE9295A16B200DFCD51 /* Feed */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FE593BE3295A160600DFCD51 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		FE593BE5295A161C00DFCD51 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FE593BE6295A161F00DFCD51 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FE593BE7295A166F00DFCD51 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FE593BED295A176100DFCD51 /* StoryView.swift */,
+				FE593BEF295A1A6500DFCD51 /* PostView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FE593BE8295A16AC00DFCD51 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FE593BE9295A16B200DFCD51 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				FE593BEA295A16BA00DFCD51 /* Views */,
+				FE593BE8295A16AC00DFCD51 /* ViewModels */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		FE593BEA295A16BA00DFCD51 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE593BEB295A170C00DFCD51 /* FeedView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +211,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE593BD6295A0A5B00DFCD51 /* ContentView.swift in Sources */,
+				FE593BEC295A170C00DFCD51 /* FeedView.swift in Sources */,
+				FE593BEE295A176100DFCD51 /* StoryView.swift in Sources */,
+				FE593BF0295A1A6500DFCD51 /* PostView.swift in Sources */,
 				FE593BD4295A0A5B00DFCD51 /* InstaCloneApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
