@@ -10,19 +10,37 @@ import SwiftUI
 struct FeedView: View {
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack {
-                ScrollView(.horizontal) {
-                    LazyHStack {
-                        ForEach(0 ... 20, id: \.self) { _ in
-                            StoryView()
-                                .padding(.leading, 8)
+        VStack {
+            ZStack {
+                HStack(spacing: 15) {
+                    Text("Instagram")
+                        .font(.system(size: 25))
+                        .bold()
+                    Spacer()
+                    Image(systemName: "plus.app")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                    Image(systemName: "heart")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                    Image(systemName: "plus.message")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                }
+                .padding(.horizontal)
+            }
+            ScrollView(.vertical) {
+                VStack {
+                    ScrollView(.horizontal) {
+                        LazyHStack {
+                            ForEach(0 ... 20, id: \.self) { _ in
+                                StoryView()
+                                    .padding(.leading, 8)
+                            }
                         }
                     }
-                }
-                .frame(height: 115)
-                
-                ScrollView(.vertical) {
+                    .frame(height: 115)
+                    
                     LazyVStack {
                         ForEach(0 ... 20, id: \.self) { _ in
                             PostView()
@@ -30,8 +48,8 @@ struct FeedView: View {
                     }
                 }
             }
-        }
     }
+}
 }
 
 struct FeedView_Previews: PreviewProvider {
