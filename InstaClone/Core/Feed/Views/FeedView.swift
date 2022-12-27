@@ -14,7 +14,7 @@ struct FeedView: View {
             ZStack {
                 HStack(spacing: 15) {
                     Text("Instagram")
-                        .font(.system(size: 25))
+                        .font(.system(size: 30, weight: .bold, design: .rounded))
                         .bold()
                     Spacer()
                     Image(systemName: "plus.app")
