@@ -11,9 +11,6 @@ struct ProfileView: View {
     
     @State var selectedFilter: PostsFilterViewModel = .personal
     @Namespace var animation
-    var columns = [GridItem(.flexible()),
-                   GridItem(.flexible()),
-                   GridItem(.flexible())]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,7 +25,7 @@ struct ProfileView: View {
                         .frame(width: 20, height: 20)
                     Image(systemName: "list.dash")
                         .resizable()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 20, height: 18)
                 }
                 .padding(.horizontal)
             }
@@ -96,9 +93,7 @@ struct ProfileView: View {
                         .padding(4)
                         .background(Color.black)
                         .foregroundColor(.white)
-                        .overlay(RoundedRectangle(cornerRadius: 7).stroke())
                         .clipShape(RoundedRectangle(cornerRadius: 7))
-                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 8)
@@ -141,15 +136,7 @@ struct ProfileView: View {
                 .padding(.top)
                 .padding(.bottom, -8)
                 
-                LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(0 ..< 15, id: \.self) { index in
-                        Rectangle()
-                            .foregroundColor(.gray)
-                            .frame(height: 130)
-                            .border(.white)
-                            .padding(.trailing, -8)
-                    }
-                }
+                GridForPostsView()
             }
         }
     }
