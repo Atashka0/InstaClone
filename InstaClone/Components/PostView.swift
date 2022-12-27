@@ -55,34 +55,8 @@ struct PostView: View {
             }
             .padding(.horizontal)
             
-            HStack(spacing: -5) {
-                Circle()
-                    .frame(width: 20, height: 20)
-                    .overlay(Circle()
-                        .stroke(.white))
-                Circle()
-                    .frame(width: 20, height: 20)
-                    .overlay(Circle()
-                        .stroke(.white, lineWidth: 2))
-                Circle()
-                    .frame(width: 20, height: 20)
-                    .overlay(Circle()
-                        .stroke(.white, lineWidth: 2))
-                
-                HStack(spacing: 2) {
-                    Text("Followed by")
-                    Text("thisisaikerim")
-                        .bold()
-                    Text("and")
-                    Text("386 545 others")
-                        .bold()
-                }
+            PostFollowedByView()
                 .padding(.leading)
-                .font(.system(size: 15))
-                
-            }
-            .padding(.top, 7)
-            .frame(minWidth: 0, maxWidth: .infinity)
             
             HStack(alignment: .center) {
                 Text("behaviorhack")
