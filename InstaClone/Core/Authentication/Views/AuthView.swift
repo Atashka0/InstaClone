@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AuthView: View {
-    @State var username: String = ""
+    @EnvironmentObject var viewModel: AuthViewModel
+    @State var email: String = ""
     @State var password: String = ""
     var body: some View {
         VStack {
@@ -16,13 +17,13 @@ struct AuthView: View {
             Text("Instagram")
                 .font(.system(size: 45, weight: .bold, design: .rounded))
                 .bold()
-            TextField("Username",text: $username)
+            TextField("Email",text: $email)
                 .padding()
                 .frame(height: 45)
                 .background(Color(.systemGray5))
                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color(uiColor: .systemGray5)))
                 .clipShape(RoundedRectangle(cornerRadius: 7))
-            TextField("Password",text: $password)
+            CustomInputView(placeholder: "Password", isSecuredField: true, text: $password)
                 .padding()
                 .frame(height: 45)
                 .background(Color(.systemGray5))
@@ -41,7 +42,7 @@ struct AuthView: View {
 
             }
             Button {
-                
+                viewModel.login(mail: email, password: password )
             } label: {
                 Text("Log in")
             }

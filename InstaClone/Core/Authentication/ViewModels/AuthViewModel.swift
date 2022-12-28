@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
@@ -23,7 +24,31 @@ class AuthViewModel: ObservableObject {
         }
         Auth.auth().createUser(withEmail: mail, password: password) { result, error in
             guard error == nil else {return}
+            guard let user = result?.user else {return}
+            self.userSession = user
+            
+            let data = ["username" : nick,
+                        "password" : password,
+                        "mail" : mail]
+            
+            Firestore.firestore().collection("users")
+                .document(user.uid)
+                .setData(data) { _ in
+                    
+                    
+                }
+        }
+    }
+    
+    func login(mail: String, password: String) {
+        Auth.auth().signIn(withEmail: mail, password: password) { result, error in
+            guard error == nil else {return}
             self.userSession = result?.user
         }
+    }
+    
+    func logOut() {
+        self.userSession = nil
+        try? Auth.auth().signOut()
     }
 }

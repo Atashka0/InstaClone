@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
+    @EnvironmentObject var viewModel: AuthViewModel
     @State var selectedFilter: PostsFilterViewModel = .personal
     @State var presentSheet: Bool = false
     @Namespace var animation
@@ -91,19 +91,27 @@ extension ProfileView {
                 } label: {
                     Image(systemName: "list.dash")
                         .resizable()
+                        .foregroundColor(.black)
                         .frame(width: 20, height: 18)
                 }
                 .sheet(isPresented: $presentSheet) {
                     VStack(alignment: .leading) {
                         ForEach(ProfileSheetViewModel.allCases, id: \.self) { item in
                             HStack {
-                                Image(item.imageName)
-                                    .foregroundColor(.black)
-                                Text(item.title)
+                                Button {
+                                    viewModel.logOut()
+                                } label: {
+                                    Image(systemName: item.imageName)
+                                        .foregroundColor(.black)
+                                        .frame(width: 30, height: 30)
+                                    Text(item.title)
+                                        .foregroundColor(.black)
+                                }
                             }
-                            .frame(minWidth: 0, maxWidth: .infinity)
+                            
                         }
                     }
+                    .frame(minWidth: 0, maxWidth: .infinity)
                     
                 }
                 
@@ -123,9 +131,8 @@ extension ProfileView {
                 Text("0")
                     .bold()
                 Text("Posts")
-                    .minimumScaleFactor(0.7)
                     .lineLimit(1)
-                    .font(.subheadline)
+                    .font(.caption)
             }
             VStack {
                 Text("0")
