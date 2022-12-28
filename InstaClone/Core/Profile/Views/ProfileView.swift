@@ -14,56 +14,9 @@ struct ProfileView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ZStack {
-                HStack(spacing: 20) {
-                    Text("ilyaskb")
-                        .font(.system(size: 16))
-                        .bold()
-                    Spacer()
-                    Image(systemName: "plus.app")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    Image(systemName: "list.dash")
-                        .resizable()
-                        .frame(width: 20, height: 18)
-                }
-                .padding(.horizontal)
-            }
-            
+            headerView
             ScrollView(.vertical) {
-                HStack(spacing: 35) {
-                    Circle()
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(.blue)
-                    Spacer()
-                    
-                    VStack {
-                        Text("0")
-                            .bold()
-                        Text("Posts")
-                            .minimumScaleFactor(0.7)
-                            .lineLimit(1)
-                            .font(.subheadline)
-                    }
-                    VStack {
-                        Text("0")
-                            .bold()
-                        Text("Followers")
-                            .minimumScaleFactor(0.7)
-                            .lineLimit(1)
-                            .font(.subheadline)
-                    }
-                    
-                    VStack {
-                        Text("0")
-                            .bold()
-                        Text("Following")
-                            .minimumScaleFactor(0.7)
-                            .lineLimit(1)
-                            .font(.subheadline)
-                        
-                    }
-                }
+               profileFollowInfoView
                 .padding(.horizontal)
                 
                 VStack(alignment: .leading) {
@@ -108,35 +61,98 @@ struct ProfileView: View {
                 }
                 .frame(height: 115)
                 
-                HStack {
-                    ForEach(PostsFilterViewModel.allCases, id: \.self) { item in
-                        VStack {
-                            Image(systemName: item.imageTitle)
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                            
-                            if selectedFilter == item {
-                                Capsule()
-                                    .foregroundColor(.black)
-                                    .frame(height: 3)
-                                    .matchedGeometryEffect(id: "filter", in: animation)
-                            } else {
-                                Capsule()
-                                    .foregroundColor(.clear)
-                                    .frame(height:3)
-                            }
-                        }
-                        .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                selectedFilter = item
-                            }
-                        }
-                    }
-                }
+                postsFilterView
                 .padding(.top)
                 .padding(.bottom, -8)
                 
                 GridForPostsView()
+            }
+        }
+        //.edgesIgnoringSafeArea(.top)
+    }
+}
+
+
+
+extension ProfileView {
+    var headerView: some View  {
+        ZStack {
+            HStack(spacing: 20) {
+                Text("ilyaskb")
+                    .font(.system(size: 16))
+                    .bold()
+                Spacer()
+                Image(systemName: "plus.app")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Image(systemName: "list.dash")
+                    .resizable()
+                    .frame(width: 20, height: 18)
+            }
+            .padding(.horizontal)
+        }
+    }
+    
+    var profileFollowInfoView: some View {
+        HStack(spacing: 35) {
+            Circle()
+                .frame(width: 100, height: 100)
+                .foregroundColor(.blue)
+            Spacer()
+            
+            VStack {
+                Text("0")
+                    .bold()
+                Text("Posts")
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
+                    .font(.subheadline)
+            }
+            VStack {
+                Text("0")
+                    .bold()
+                Text("Followers")
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
+                    .font(.subheadline)
+            }
+            
+            VStack {
+                Text("0")
+                    .bold()
+                Text("Following")
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
+                    .font(.subheadline)
+                
+            }
+        }
+    }
+    
+    var postsFilterView: some View {
+        HStack {
+            ForEach(PostsFilterViewModel.allCases, id: \.self) { item in
+                VStack {
+                    Image(systemName: item.imageTitle)
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                    
+                    if selectedFilter == item {
+                        Capsule()
+                            .foregroundColor(.black)
+                            .frame(height: 3)
+                            .matchedGeometryEffect(id: "filter", in: animation)
+                    } else {
+                        Capsule()
+                            .foregroundColor(.clear)
+                            .frame(height:3)
+                    }
+                }
+                .onTapGesture {
+                    withAnimation(.easeInOut) {
+                        selectedFilter = item
+                    }
+                }
             }
         }
     }

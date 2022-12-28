@@ -19,6 +19,7 @@ struct SearchView: View {
                 GridForPostsView()
             }
         }
+        //.edgesIgnoringSafeArea(.top)
     }
 }
 

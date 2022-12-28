@@ -1,5 +1,5 @@
 //
-//  AuthView.swift
+//  RegView.swift
 //  InstaClone
 //
 //  Created by Ilyas Kudaibergenov on 27.12.2022.
@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-struct AuthView: View {
+struct RegView: View {
     @State var username: String = ""
+    @State var email: String = ""
     @State var password: String = ""
+    @State var passwordVerification: String = ""
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack {
             Spacer()
@@ -22,28 +26,29 @@ struct AuthView: View {
                 .background(Color(.systemGray5))
                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color(uiColor: .systemGray5)))
                 .clipShape(RoundedRectangle(cornerRadius: 7))
+            TextField("Full Name",text: $email)
+                .padding()
+                .frame(height: 45)
+                .background(Color(.systemGray5))
+                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color(uiColor: .systemGray5)))
+                .clipShape(RoundedRectangle(cornerRadius: 7))
             TextField("Password",text: $password)
                 .padding()
                 .frame(height: 45)
                 .background(Color(.systemGray5))
                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color(uiColor: .systemGray5)))
                 .clipShape(RoundedRectangle(cornerRadius: 7))
-            
-            HStack {
-                Spacer()
-                NavigationLink {
-                    Text("LOL")
-                } label: {
-                    Text("Forgotten password?")
-                        .font(.footnote)
-                        .foregroundColor(.blue)
-                }
-
-            }
+            TextField("Confirm password",text: $passwordVerification)
+                .padding()
+                .frame(height: 45)
+                .background(Color(.systemGray5))
+                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color(uiColor: .systemGray5)))
+                .clipShape(RoundedRectangle(cornerRadius: 7))
+            //refactor this
             Button {
                 
             } label: {
-                Text("Log in")
+                Text("Sign up")
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(height: 45)
@@ -52,32 +57,27 @@ struct AuthView: View {
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(uiColor: .systemGray5)))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .padding(.top, 10)
-            
-            Spacer()
             Spacer()
             
             HStack {
-                Text("Don't have an account?")
+                Text("Already have an account?")
                     .foregroundColor(.gray)
                 
-                NavigationLink {
-                    RegView()
-                        .navigationBarHidden(true)
+                Button {
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Text("Sign Up")
+                    Text("Log in")
                         .foregroundColor(.blue)
                 }
-
             }
-
         }
         .padding(.horizontal)
+        
     }
 }
 
-struct AuthView_Previews: PreviewProvider {
+struct RegView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        RegView()
     }
 }
