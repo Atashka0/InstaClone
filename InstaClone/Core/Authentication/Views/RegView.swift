@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct RegView: View {
-    @State var username: String = ""
     @State var email: String = ""
+    @State var username: String = ""
     @State var password: String = ""
     @State var passwordVerification: String = ""
+    
+    @EnvironmentObject var viewModel: AuthViewModel
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -20,13 +22,13 @@ struct RegView: View {
             Text("Instagram")
                 .font(.system(size: 45, weight: .bold, design: .rounded))
                 .bold()
-            TextField("Username",text: $username)
+            TextField("email",text: $email)
                 .padding()
                 .frame(height: 45)
                 .background(Color(.systemGray5))
                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color(uiColor: .systemGray5)))
                 .clipShape(RoundedRectangle(cornerRadius: 7))
-            TextField("Full Name",text: $email)
+            TextField("username",text: $username)
                 .padding()
                 .frame(height: 45)
                 .background(Color(.systemGray5))
@@ -46,7 +48,7 @@ struct RegView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 7))
             //refactor this
             Button {
-                
+                viewModel.register(withEmail: email, withUsername: username, withPassword: password, withConfirmedPassword: passwordVerification)
             } label: {
                 Text("Sign up")
             }

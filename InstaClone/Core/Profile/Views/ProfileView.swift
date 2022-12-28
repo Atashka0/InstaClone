@@ -10,14 +10,15 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var selectedFilter: PostsFilterViewModel = .personal
+    @State var presentSheet: Bool = false
     @Namespace var animation
     
     var body: some View {
         VStack(alignment: .leading) {
             headerView
             ScrollView(.vertical) {
-               profileFollowInfoView
-                .padding(.horizontal)
+                profileFollowInfoView
+                    .padding(.horizontal)
                 
                 VStack(alignment: .leading) {
                     Text("Art")
@@ -25,7 +26,7 @@ struct ProfileView: View {
                     
                     Text("modeling:")
                         .font(.system(size: 14))
-                        
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
@@ -62,8 +63,8 @@ struct ProfileView: View {
                 .frame(height: 115)
                 
                 postsFilterView
-                .padding(.top)
-                .padding(.bottom, -8)
+                    .padding(.top)
+                    .padding(.bottom, -8)
                 
                 GridForPostsView()
             }
@@ -85,9 +86,27 @@ extension ProfileView {
                 Image(systemName: "plus.app")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Image(systemName: "list.dash")
-                    .resizable()
-                    .frame(width: 20, height: 18)
+                Button {
+                    self.presentSheet = true
+                } label: {
+                    Image(systemName: "list.dash")
+                        .resizable()
+                        .frame(width: 20, height: 18)
+                }
+                .sheet(isPresented: $presentSheet) {
+                    VStack(alignment: .leading) {
+                        ForEach(ProfileSheetViewModel.allCases, id: \.self) { item in
+                            HStack {
+                                Image(item.imageName)
+                                    .foregroundColor(.black)
+                                Text(item.title)
+                            }
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                        }
+                    }
+                    
+                }
+                
             }
             .padding(.horizontal)
         }

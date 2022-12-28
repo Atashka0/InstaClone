@@ -14,4 +14,16 @@ class AuthViewModel: ObservableObject {
     init() {
         self.userSession = Auth.auth().currentUser
     }
+    
+    func register(withEmail mail: String, withUsername nick: String, withPassword password: String, withConfirmedPassword passwordConfirmed: String) {
+        guard password == passwordConfirmed else {
+            print("u dumb")
+            return
+            
+        }
+        Auth.auth().createUser(withEmail: mail, password: password) { result, error in
+            guard error == nil else {return}
+            self.userSession = result?.user
+        }
+    }
 }

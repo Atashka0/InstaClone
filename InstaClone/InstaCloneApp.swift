@@ -10,6 +10,8 @@ import Firebase
 
 @main
 struct InstaCloneApp: App {
+    
+    @StateObject var viewModel = AuthViewModel()
 
     init() {
         FirebaseApp.configure()
@@ -17,6 +19,7 @@ struct InstaCloneApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
         }
     }
 }
