@@ -68,6 +68,9 @@ extension ProfileView {
                     Text("\(user.username)")
                     .font(.system(size: 16))
                     .bold()
+                    .onReceive(viewModel.$userSession) { _ in
+                        self.viewModel.fetchData()
+                    }
                 }
                 Spacer()
                 Image(systemName: "plus.app")

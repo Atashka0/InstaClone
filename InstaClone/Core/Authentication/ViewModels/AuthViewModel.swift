@@ -16,7 +16,9 @@ class AuthViewModel: ObservableObject {
     @Published var currentUser: User?
     
     init() {
+        print("DEBUG: UserSession has new value")
         self.userSession = Auth.auth().currentUser
+        
         fetchData()
     }
     
@@ -67,6 +69,7 @@ class AuthViewModel: ObservableObject {
         guard let uid = self.userSession?.uid else {return}
         UserService.fetchData(withUID: uid) { user in
             self.currentUser = user
+            print("DEBUG: Current user is \(user.username)")
         }
     }
 }
