@@ -13,7 +13,10 @@ struct ProfileView: View {
     @State var presentSheet: Bool = false
     @State var showImagePicker: Bool = false
     @State var selectedImage: UIImage?
+    @State var bio: String = ""
     @Namespace var animation
+    @State var showEditProfile: Bool = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,17 +24,11 @@ struct ProfileView: View {
             ScrollView(.vertical) {
                 profileFollowInfoView
                     .padding(.horizontal)
-                
-                VStack(alignment: .leading) {
-                    Text("Art")
-                        .font(.system(size: 14))
-                    
-                    Text("modeling:")
-                        .font(.system(size: 14))
-                    
+                if let bio = self.viewModel.currentUser?.bio {
+                    Text(bio)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
                 
                 
                 profileButtonsView
@@ -66,11 +63,11 @@ extension ProfileView {
             HStack(spacing: 20) {
                 if let user = viewModel.currentUser {
                     Text("\(user.username)")
-                    .font(.system(size: 16))
-                    .bold()
-                    .onReceive(viewModel.$userSession) { _ in
-                        self.viewModel.fetchData()
-                    }
+                        .font(.system(size: 16))
+                        .bold()
+                        .onReceive(viewModel.$userSession) { _ in
+                            self.viewModel.fetchData()
+                        }
                 }
                 Spacer()
                 Image(systemName: "plus.app")
@@ -190,13 +187,45 @@ extension ProfileView {
     }
     var profileButtonsView: some View {
         HStack {
-            Text("Edit Profile")
-                .frame(width: 350, height: 34)
-                .background(Color.black)
-                .foregroundColor(.white)
-                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.white))
-                .clipShape(RoundedRectangle(cornerRadius: 7))
-                .fixedSize(horizontal: false, vertical: true)
+            Button {
+                self.showEditProfile.toggle()
+            } label: {
+                Text("Edit Profile")
+                    .frame(width: 350, height: 34)
+                    .background(Color.black)
+                    .foregroundColor(.white)
+                    .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.white))
+                    .clipShape(RoundedRectangle(cornerRadius: 7))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .sheet(isPresented: $showEditProfile) {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Text("Bio")
+                        Divider()
+                        TextField("Add bio", text: $bio)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding(.horizontal, 20)
+                    .frame(height: 50)
+                    .background(Color(cgColor: CGColor(gray: 1, alpha: 0.4)))
+                    .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.white))
+                    .clipShape(RoundedRectangle(cornerRadius: 7))
+                    Button {
+                        viewModel.uploadBio(withBio: bio)
+                        self.presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Done")
+                            .frame(width: 100, height: 50)
+                            .foregroundColor(.white)
+                            .background(.black)
+                            .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.white))
+                            .clipShape(RoundedRectangle(cornerRadius: 7))
+                    }
+                    Spacer()
+                }
+            }
             
             Image(systemName: "person.badge.plus")
                 .resizable()

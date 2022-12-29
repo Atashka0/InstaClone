@@ -72,4 +72,11 @@ class AuthViewModel: ObservableObject {
             print("DEBUG: Current user is \(user.username)")
         }
     }
+    
+    func uploadBio(withBio bio: String) {
+        guard let uid = self.userSession?.uid else {return}
+            Firestore.firestore().collection("users")
+                .document(uid).updateData(["bio" : bio])
+        self.fetchData()
+    }
 }
