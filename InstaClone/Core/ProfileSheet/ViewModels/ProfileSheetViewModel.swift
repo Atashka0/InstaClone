@@ -8,9 +8,11 @@
 import Foundation
 
 enum ProfileSheetViewModel: CaseIterable {
+    
     case saved
     case closeFriends
     case logout
+    
     var title: String {
         switch self {
         case .closeFriends:

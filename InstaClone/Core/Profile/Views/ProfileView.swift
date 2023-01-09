@@ -192,13 +192,13 @@ extension ProfileView {
             } label: {
                 Text("Edit Profile")
                     .frame(width: 350, height: 34)
-                    .background(Color.black)
                     .foregroundColor(.white)
-                    .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.white))
-                    .clipShape(RoundedRectangle(cornerRadius: 7))
-                    .fixedSize(horizontal: false, vertical: true)
+                    .background {
+                        RoundedRectangle(cornerRadius: 7)
+                            .fill(.black)
+                    }
             }
-            .sheet(isPresented: $showEditProfile) {
+            .fullScreenCover(isPresented: $showEditProfile) {
                 VStack {
                     Spacer()
                     HStack {
@@ -214,7 +214,7 @@ extension ProfileView {
                     .clipShape(RoundedRectangle(cornerRadius: 7))
                     Button {
                         viewModel.uploadBio(withBio: bio)
-                        self.presentationMode.wrappedValue.dismiss()
+                        self.showEditProfile = false
                     } label: {
                         Text("Done")
                             .frame(width: 100, height: 50)
@@ -225,6 +225,7 @@ extension ProfileView {
                     }
                     Spacer()
                 }
+                .edgesIgnoringSafeArea(.bottom)
             }
             
             Image(systemName: "person.badge.plus")

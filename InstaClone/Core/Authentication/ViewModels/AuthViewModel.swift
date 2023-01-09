@@ -12,14 +12,16 @@ import FirebaseFirestore
 
 
 class AuthViewModel: ObservableObject {
-    @Published var userSession: FirebaseAuth.User?
+    @Published var userSession: FirebaseAuth.User? {
+        didSet {
+            fetchData()
+        }
+    }
     @Published var currentUser: User?
     
     init() {
         print("DEBUG: UserSession has new value")
         self.userSession = Auth.auth().currentUser
-        
-        fetchData()
     }
     
     func register(withEmail mail: String, withUsername nick: String, withPassword password: String, withConfirmedPassword passwordConfirmed: String) {
@@ -77,6 +79,5 @@ class AuthViewModel: ObservableObject {
         guard let uid = self.userSession?.uid else {return}
             Firestore.firestore().collection("users")
                 .document(uid).updateData(["bio" : bio])
-        self.fetchData()
     }
 }
